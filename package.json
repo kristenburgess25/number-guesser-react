@@ -1,7 +1,7 @@
 {
-  "name": "number-guesser-react",
+  "name": "Number Guesser",
   "version": "1.0.0",
-  "description": "solo number guesser project",
+  "description": "number guesser in react",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --hot --inline",
