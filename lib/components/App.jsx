@@ -17,6 +17,12 @@ class App extends React.Component {
     this.setState({randomNumber: number});
   }
 
+  checkGuess(guess) {
+//if guess entered by user matches random number, give winning Message
+//message for number too low
+//message for number too high
+  }
+
 
   render () {
     return (
@@ -27,7 +33,7 @@ class App extends React.Component {
               </header>
 
               <main className="body">
-                <PlayerGuess />
+                <PlayerGuess submitGuess={this.checkGuess.bind(this)} />
               </main>
 
               <footer id="footer">

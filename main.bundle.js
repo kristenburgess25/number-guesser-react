@@ -46,7 +46,6 @@
 
 	'use strict';
 
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./css/styles.scss\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	__webpack_require__(1);
 
 /***/ },
@@ -66,8 +65,7 @@
 	var React = __webpack_require__(2);
 	var ReactDOM = __webpack_require__(35);
 	var $ = __webpack_require__(173);
-	var WeatherButton = __webpack_require__(175);
-	// require('./LocalStorage.jsx');
+	var PlayerGuess = __webpack_require__(175);
 
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
@@ -78,8 +76,7 @@
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
 	    _this.state = {
-	      weather: [],
-	      location: "Denver"
+	      randomNumber: []
 	    };
 	    return _this;
 	  }
@@ -87,234 +84,36 @@
 	  _createClass(App, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var that = this;
-	      var mostRecentLocation = JSON.parse(localStorage.getItem("location"));
-	      this.setState({ location: mostRecentLocation ? mostRecentLocation : "Denver" });
-	    } //end of componentDidMount
-
-	  }, {
-	    key: 'getWeatherData',
-	    value: function getWeatherData() {
-	      //when they click on Get Weather button
-	      var that = this;
-	      var city = this.state.location.toUpperCase();
-	      var target = void 0;
-	      if (city === "DENVER") {
-	        target = "denver";
-	      } else if (city === "SAN DIEGO") {
-	        target = "san-diego";
-	      } else if (city === "CASTLE ROCK") {
-	        target = "castle-rock";
-	      } else if (city === "SAN FRANCISCO") {
-	        target = "san-fransico";
-	      } else {
-	        changeWindow(city);
-	      }
-
-	      $.get("http://weatherly-api.herokuapp.com/api/weather/" + target, function (data) {
-	        that.setState({ weather: data });
-	      });
-
-	      localStorage.setItem("location", JSON.stringify(this.state.location));
-
-	      function changeWindow(city) {
-	        var urlAssignment = "https://www.google.com/search?q=weather&ie=utf-8&oe=utf-8#q=weather+";
-	        var newAssignment = urlAssignment + city;
-	        window.open(newAssignment);
-	      }
-	    } //end of getWeatherData
-
-	  }, {
-	    key: 'handleInputChange',
-	    value: function handleInputChange(e) {
-	      //when they enter data into location field
-	      this.setState({ location: e.target.value });
-	    }
-	  }, {
-	    key: 'enterFunctionality',
-	    value: function enterFunctionality(e) {
-	      var that = this;
-	      if (e.keyCode === 13) {
-	        that.getWeatherData();
-	      }
+	      var number = Math.floor(Math.random() * 100 + 1);
+	      this.setState({ randomNumber: number });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
-
 	      return React.createElement(
 	        'div',
-	        { className: 'GetWeather' },
+	        { className: 'Application' },
 	        React.createElement(
 	          'header',
-	          { className: this.state.location },
+	          { id: 'header' },
 	          React.createElement(
 	            'h1',
-	            null,
-	            'Welcome to Weathrly'
-	          ),
-	          React.createElement(
-	            'h3',
-	            null,
-	            'Your World',
-	            React.createElement('br', null),
-	            'Your Weather'
+	            { id: 'title' },
+	            ' NumberGuesser'
 	          )
 	        ),
 	        React.createElement(
-	          'fieldset',
-	          null,
-	          React.createElement(
-	            'label',
-	            { htmlFor: 'current-location-input', className: 'fieldset-left-item' },
-	            'Your Current Location:',
-	            React.createElement('input', { id: 'current-location-input', type: 'text', placeholder: 'City', list: 'current-loc-list', onChange: this.handleInputChange.bind(this), value: this.state.location, onKeyDown: this.enterFunctionality.bind(this) }),
-	            React.createElement(
-	              'datalist',
-	              { id: 'current-loc-list' },
-	              React.createElement('option', { value: 'San Diego' }),
-	              React.createElement('option', { value: 'Denver' }),
-	              React.createElement('option', { value: 'San Francisco' }),
-	              React.createElement('option', { value: 'Castle Rock' })
-	            )
-	          )
+	          'main',
+	          { className: 'body' },
+	          React.createElement(PlayerGuess, null)
 	        ),
-	        React.createElement(WeatherButton, { id: 'get-weather-button', text: 'Get Weather', handleClick: function handleClick() {
-	            return _this2.getWeatherData();
-	          } }),
-	        React.createElement(WeatherList, { data: this.state.weather, city: this.state.location })
-	      ) //end of GetWeather
-	      ;
+	        React.createElement('footer', { id: 'footer' })
+	      );
 	    }
 	  }]);
 
 	  return App;
-	}(React.Component); //end of App
-
-	var WeatherList = function (_React$Component2) {
-	  _inherits(WeatherList, _React$Component2);
-
-	  function WeatherList(props) {
-	    _classCallCheck(this, WeatherList);
-
-	    return _possibleConstructorReturn(this, (WeatherList.__proto__ || Object.getPrototypeOf(WeatherList)).call(this, props));
-	  }
-
-	  _createClass(WeatherList, [{
-	    key: 'showWeatherData',
-	    value: function showWeatherData(data) {
-
-	      var condition = data.weatherType.type;
-	      var chooseIcon = {
-	        'cloudy': '../../images/cloudy2.png',
-	        'foggy': '../../images/foggy.png',
-	        'rain': '../../images/rain2.png',
-	        'snow': '../../images/snowflake2.png',
-	        'sunny': '../../images/sun.png',
-	        'thunder storms': '../../images/thunder.png',
-	        'windy': '../../images/wind.png'
-	      }; //end of chooseIcon
-
-	      return React.createElement(
-	        'div',
-	        { className: 'weather-card' },
-	        React.createElement(
-	          'p',
-	          { className: 'date' },
-	          data.date
-	        ),
-	        React.createElement('img', { alt: 'weather icon', className: 'symbol', src: chooseIcon[condition] }),
-	        React.createElement(
-	          'p',
-	          { className: 'weather-card-text1' },
-	          ' The weather will be ',
-	          data.weatherType.type,
-	          ' with a high of ',
-	          data.temp.high,
-	          ' and a low of ',
-	          data.temp.low,
-	          '.'
-	        ),
-	        React.createElement(
-	          'p',
-	          { className: 'weather-card-text2' },
-	          'There will be a ',
-	          Math.floor(data.weatherType.chance * 100),
-	          ' percent chance of this weather event happening.'
-	        )
-	      );
-	    }
-	  }, {
-	    key: 'showExtremeWeather',
-	    //end of showWeatherData
-
-	    value: function showExtremeWeather(data) {
-	      var condition = data.weatherType.type;
-	      var extremeness = data.weatherType.scale;
-
-	      var chooseCondition1 = {
-	        'sunny': 'There will be extreme sun.',
-	        'rain': 'There will be a high chance of flooding and extreme rain.',
-	        'windy': 'There will be very high winds.',
-	        'snow': 'There will be heavy snow!',
-	        'foggy': 'There will be heavy fog.'
-	      }; //end of chooseCondition1
-
-	      var chooseCondition2 = {
-	        'sunny': 'Take care and use plenty of sunscreen!',
-	        'rain': "Stay inside and don't drive if possible!",
-	        'windy': 'Stay indoors!',
-	        'snow': 'Take precautions!',
-	        'foggy': 'Be aware that driving visibility will be extremely limited.'
-	      }; //end of chooseCondition2
-
-	      if (extremeness === 3) {
-	        return React.createElement(
-	          'div',
-	          { className: 'warning' },
-	          React.createElement(
-	            'p',
-	            { className: 'date' },
-	            data.date
-	          ),
-	          React.createElement('img', { alt: 'extreme weather warning icon', className: 'symbol', src: '../../images/alert.png' }),
-	          React.createElement(
-	            'p',
-	            { className: 'weather-card-text1' },
-	            chooseCondition1[condition]
-	          ),
-	          React.createElement(
-	            'p',
-	            { className: 'weather-card-text2' },
-	            chooseCondition2[condition]
-	          )
-	        );
-	      }
-	    } //end of showExtremeWeather
-
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return React.createElement(
-	        'ul',
-	        null,
-	        React.createElement(
-	          'li',
-	          null,
-	          this.props.data.map(this.showExtremeWeather)
-	        ),
-	        React.createElement(
-	          'li',
-	          null,
-	          this.props.data.map(this.showWeatherData)
-	        )
-	      );
-	    }
-	  }]);
-
-	  return WeatherList;
-	}(React.Component); //end of WeatherList
+	}(React.Component);
 
 	ReactDOM.render(React.createElement(App, { title: 'Weathrly' }), document.querySelector('#application'));
 	module.exports = App;
@@ -23404,37 +23203,71 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var React = __webpack_require__(2);
-	var ReactDOM = __webpack_require__(35);
 
-	var WeatherButton = function (_React$Component) {
-	  _inherits(WeatherButton, _React$Component);
+	var PlayerGuess = function (_React$Component) {
+	  _inherits(PlayerGuess, _React$Component);
 
-	  function WeatherButton() {
-	    _classCallCheck(this, WeatherButton);
+	  function PlayerGuess(props) {
+	    _classCallCheck(this, PlayerGuess);
 
-	    return _possibleConstructorReturn(this, (WeatherButton.__proto__ || Object.getPrototypeOf(WeatherButton)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (PlayerGuess.__proto__ || Object.getPrototypeOf(PlayerGuess)).call(this, props));
+
+	    _this.state = {
+	      guess: ''
+	    };
+	    return _this;
 	  }
 
-	  _createClass(WeatherButton, [{
+	  _createClass(PlayerGuess, [{
+	    key: 'clearInput',
+	    value: function clearInput() {
+	      this.setState({ guess: '' });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-
 	      return React.createElement(
-	        'button',
-	        { className: 'WeatherButton', id: this.props.id, onClick: this.props.handleClick },
+	        'div',
+	        { className: 'PlayerGuess' },
 	        React.createElement(
-	          'span',
+	          'p',
 	          null,
-	          this.props.text
+	          ' Your last guess was ... '
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          ' ## '
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          ' Message to player - too high or low '
+	        ),
+	        React.createElement('input', { className: 'guessNumber', placeholder: 'Enter your best guess!' }),
+	        React.createElement(
+	          'button',
+	          { className: 'Guess' },
+	          ' GUESS '
+	        ),
+	        React.createElement(
+	          'button',
+	          { className: 'Clear' },
+	          ' CLEAR '
+	        ),
+	        React.createElement(
+	          'button',
+	          { className: 'Reset' },
+	          ' RESET '
 	        )
 	      );
 	    }
 	  }]);
 
-	  return WeatherButton;
-	}(React.Component); //end of WeatherButton
+	  return PlayerGuess;
+	}(React.Component);
 
-	module.exports = WeatherButton;
+	module.exports = PlayerGuess;
 
 /***/ }
 /******/ ]);

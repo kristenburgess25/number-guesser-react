@@ -1,5 +1,5 @@
 {
-  "name": "Number Guesser",
+  "name": "NumberGuesser",
   "version": "1.0.0",
   "description": "number guesser in react",
   "main": "index.js",
