@@ -11,11 +11,10 @@ class GuessRange extends React.Component {
 
   setRange() {
     debugger;
-    if(document.getElementById('player-message').innerHTML="Your guess was too low! Try again!"){
+    if(document.getElementById('player-message').innerHTML="Your guess was too low! Try again!") {
       let minInput = parseInt(this.state.min) - 10;
       let maxInput = parseInt(this.state.max) + 10;
       this.setState({min: minInput , max: maxInput});
-      this.props.setRange(minInput, maxInput)
     } else {
     let minInput = this.state.min;
     let maxInput= this.state.max;
