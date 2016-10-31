@@ -21,8 +21,7 @@ class PlayerGuess extends React.Component {
   }
 
   resetGame() {
-    let number = Math.floor((Math.random() * 100) + 1);
-    this.props.resetGame(number);
+    this.props.resetGame();
   }
 
   clearMessage() {

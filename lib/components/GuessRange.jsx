@@ -9,6 +9,12 @@ class GuessRange extends React.Component {
     };
   }
 
+  setRange() {
+    const min = this.state.min;
+    const max= this.state.max;
+    this.props.setRange(min, max)
+  }
+
   render() {
 
     return (
