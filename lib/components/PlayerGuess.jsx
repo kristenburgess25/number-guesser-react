@@ -20,6 +20,11 @@ class PlayerGuess extends React.Component {
     this.clearInput();
   }
 
+  resetGame() {
+    let number = Math.floor((Math.random() * 100) + 1);
+    this.props.resetGame(number);
+  }
+
   clearMessage() {
   document.getElementById('guessInput').value='';
   this.clearInput();
@@ -37,7 +42,7 @@ class PlayerGuess extends React.Component {
       <input id="guessInput" type="text" value={this.state.guess} onChange={(e) => this.setState({guess: e.target.value})} placeholder="Enter your best guess!"/>
       <button disabled={disabled} className="Guess" onClick={() => this.submitGuess()}> GUESS </button>
       <button disabled={disabled} className="Clear" onClick={() => this.clearMessage()}> CLEAR </button>
-      <button className="Reset"> RESET </button>
+      <button className="Reset" onClick={() => this.resetGame()}> RESET </button>
       </div>
     )
   }

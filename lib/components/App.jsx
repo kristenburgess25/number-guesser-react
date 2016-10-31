@@ -14,9 +14,13 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    var number = Math.floor((Math.random() * 100) + 1);
+    let number = Math.floor((Math.random() * 100) + 1);
     this.setState({randomNumber: number});
   }
+
+  reset(number){
+    this.setState({randomNumber: number })
+  };
 
   checkGuess(guessInt) {
 var randomNumber = this.state.randomNumber
@@ -46,7 +50,7 @@ if (randomNumber === guessInt) {
               </header>
 
               <p id="player-message"> Enter a number between 1 and 100 </p>
-              <PlayerGuess submitGuess={this.checkGuess.bind(this)} />
+              <PlayerGuess submitGuess={this.checkGuess.bind(this)} resetGame={this.reset.bind(this)} />
 
               <GuessRange />
 
