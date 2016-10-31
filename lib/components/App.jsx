@@ -17,8 +17,12 @@ class App extends React.Component {
     this.generateRandomNumber();
   }
 
-  generateRandomNumber(){
-    let number = Math.floor((Math.random() * 100) + 1);
+  generateRandomNumber(minInput, maxInput){
+    console.log(minInput);
+    console.log(maxInput);
+    let min = Math.ceil(minInput) || 0;
+    let max = Math.floor(maxInput) || 100;
+    let number = Math.floor(Math.random() * (max - min + 1)) + min;
     this.setState({randomNumber: number});
   }
 
@@ -44,9 +48,6 @@ if (randomNumber === guessInt) {
     }
   }
 
-  setRange(){
-
-  }
 
 
   render () {
@@ -60,7 +61,7 @@ if (randomNumber === guessInt) {
               <p id="player-message"> Enter a number between 1 and 100 </p>
               <PlayerGuess submitGuess={this.checkGuess.bind(this)} resetGame={this.reset.bind(this)} />
 
-              <GuessRange setRange={this.setRange.bind(this)} />
+              <GuessRange setRange={this.generateRandomNumber.bind(this)} />
 
             </div>
           );

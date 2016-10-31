@@ -10,9 +10,9 @@ class GuessRange extends React.Component {
   }
 
   setRange() {
-    const min = this.state.min;
-    const max= this.state.max;
-    this.props.setRange(min, max)
+    const minInput = this.state.min;
+    const maxInput= this.state.max;
+    this.props.setRange(minInput, maxInput)
   }
 
   render() {
@@ -20,9 +20,9 @@ class GuessRange extends React.Component {
     return (
       <div className="GuessRange">
         <label for="minimum guess">Min</label>
-        <input id="minRange" value={this.state.min} onChange={(e) => this.setState({min: e.target.value})} placeholder={this.state.min}/>
+        <input id="minRange" value={this.state.min} onChange={(e) => this.setState({min: e.target.value})} onClick={() => this.setRange()} placeholder={this.state.min}/>
         <label for="maximum guess">Max</label>
-        <input label="Min" id="maxRange" value={this.state.max} onChange={(e) => this.setState({max: e.target.value})} placeholder={this.state.max}/>
+        <input label="Min" id="maxRange" value={this.state.max} onChange={(e) => this.setState({max: e.target.value})} onClick={() => this.setRange()} placeholder={this.state.max}/>
       </div>
     )
   }
