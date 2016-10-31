@@ -17,6 +17,7 @@ class PlayerGuess extends React.Component {
     const guessInt = parseInt(this.state.guess)
     this.props.submitGuess(guessInt);
     this.setState({lastguess: this.state.guess})
+    this.clearInput();
   }
 
   clearMessage() {

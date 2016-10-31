@@ -22,7 +22,7 @@ class App extends React.Component {
 var randomNumber = this.state.randomNumber
 console.log(randomNumber)
 console.log(guessInt)
-if (guessInt === NaN) {
+if (isNaN(guessInt)) {
   document.getElementById('player-message').innerHTML="Please enter a valid number"
 }
 if (randomNumber > guessInt) {
