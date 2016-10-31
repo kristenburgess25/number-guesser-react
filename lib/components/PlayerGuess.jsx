@@ -14,8 +14,8 @@ class PlayerGuess extends React.Component {
   }
 
   submitGuess() {
-    this.props.submitGuess(this.state.guess);
-    this.setState({lastguess: this.state.guess})
+    this.setState({lastguess: parseInt(this.state.guess)})
+    this.props.submitGuess(this.state.lastguess);
     this.clearInput();
   }
 
@@ -31,7 +31,6 @@ class PlayerGuess extends React.Component {
       <div className="PlayerGuess">
       <p> Your last guess was ... </p>
       <p id='guessNumber'> {this.state.lastguess} </p>
-      <p> Message to player - too high or low </p>
       <input id="guessInput" value={this.state.guess} onChange={(e) => this.setState({guess: e.target.value})} placeholder="Enter your best guess!"/>
       <button className="Guess" onClick={() => this.submitGuess()}> GUESS </button>
       <button className="Clear" onClick={() => this.clearMessage()}> CLEAR </button>

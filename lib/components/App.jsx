@@ -1,14 +1,15 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const $ = require('jquery');
-const PlayerGuess = require('./PlayerGuess')
+const PlayerGuess = require('./PlayerGuess');
+const GuessRange = require('./GuessRange');
 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      randomNumber: [],
+      randomNumber: '',
     };
   }
 
@@ -17,10 +18,19 @@ class App extends React.Component {
     this.setState({randomNumber: number});
   }
 
-  checkGuess(guess) {
-//if guess entered by user matches random number, give winning Message
-//message for number too low
-//message for number too high
+  checkGuess(lastguess) {
+var randomNumber = this.state.randomNumber
+console.log(randomNumber)
+console.log(lastguess)
+if (randomNumber > lastguess) {
+  document.getElementById('player-message').innerHTML="Your guess was too low! Try again!"
+    }
+if (randomNumber < lastguess) {
+  document.getElementById('player-message').innerHTML="Your guess was too high! Try again!"
+    }
+if (randomNumber === lastguess) {
+  document.getElementById('player-message').innerHTML="You win!"
+    }
   }
 
 
@@ -32,12 +42,10 @@ class App extends React.Component {
                 <h1 id="title"> NumberGuesser</h1>
               </header>
 
-              <main className="body">
-                <PlayerGuess submitGuess={this.checkGuess.bind(this)} />
-              </main>
+              <p id="player-message"> Enter a number between 1 and 100 </p>
+              <PlayerGuess submitGuess={this.checkGuess.bind(this)} />
 
-              <footer id="footer">
-              </footer>
+              <GuessRange />
 
             </div>
           );
