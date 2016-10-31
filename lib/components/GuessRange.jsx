@@ -10,19 +10,27 @@ class GuessRange extends React.Component {
   }
 
   setRange() {
-    const minInput = this.state.min;
-    const maxInput= this.state.max;
+    debugger;
+    if(document.getElementById('player-message').innerHTML="Your guess was too low! Try again!"){
+      let minInput = parseInt(this.state.min) - 10;
+      let maxInput = parseInt(this.state.max) + 10;
+      this.setState({min: minInput , max: maxInput});
+      this.props.setRange(minInput, maxInput)
+    } else {
+    let minInput = this.state.min;
+    let maxInput= this.state.max;
     this.props.setRange(minInput, maxInput)
   }
+}
 
   render() {
 
     return (
       <div className="GuessRange">
         <label for="minimum guess">Min</label>
-        <input id="minRange" value={this.state.min} onChange={(e) => this.setState({min: e.target.value})} onClick={() => this.setRange()} placeholder={this.state.min}/>
+        <input id="minRange" value={this.state.min} onChange={(e) => this.setState({min: e.target.value})} onBlur={() => this.setRange()} placeholder={this.state.min}/>
         <label for="maximum guess">Max</label>
-        <input label="Min" id="maxRange" value={this.state.max} onChange={(e) => this.setState({max: e.target.value})} onClick={() => this.setRange()} placeholder={this.state.max}/>
+        <input label="Min" id="maxRange" value={this.state.max} onChange={(e) => this.setState({max: e.target.value})} onBlur={() => this.setRange()} placeholder={this.state.max}/>
       </div>
     )
   }
