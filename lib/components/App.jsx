@@ -9,7 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      randomNumber: '',
+      randomNumber: null,
     };
   }
 
@@ -18,17 +18,20 @@ class App extends React.Component {
     this.setState({randomNumber: number});
   }
 
-  checkGuess(lastguess) {
+  checkGuess(guessInt) {
 var randomNumber = this.state.randomNumber
 console.log(randomNumber)
-console.log(lastguess)
-if (randomNumber > lastguess) {
+console.log(guessInt)
+if (guessInt === NaN) {
+  document.getElementById('player-message').innerHTML="Please enter a valid number"
+}
+if (randomNumber > guessInt) {
   document.getElementById('player-message').innerHTML="Your guess was too low! Try again!"
     }
-if (randomNumber < lastguess) {
+if (randomNumber < guessInt) {
   document.getElementById('player-message').innerHTML="Your guess was too high! Try again!"
     }
-if (randomNumber === lastguess) {
+if (randomNumber === guessInt) {
   document.getElementById('player-message').innerHTML="You win!"
     }
   }
