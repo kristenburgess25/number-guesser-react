@@ -9,8 +9,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       randomNumber: null,
-      min: null,
-      max: null,
+      min: 0,
+      max: 100,
       displayMessage: "Enter a number between 1 and 100 or set your own range, then click GUESS",
     };
   }
@@ -20,15 +20,12 @@ class App extends React.Component {
   }
 
   generateRandomNumber(minInput, maxInput){
-    console.log(minInput);
-    console.log(maxInput);
-    let min = Math.ceil(minInput) || 0;
-    let max = Math.floor(maxInput) || 100;
+    let min = Math.ceil(this.state.min) ;
+    let max = Math.floor(this.state.max) ;
     let number = Math.floor(Math.random() * (max - min + 1)) + min;
     this.setState({randomNumber: number
     });
   }
-
 
   checkGuess(guessInt) {
 var randomNumber = this.state.randomNumber
@@ -45,25 +42,44 @@ if (randomNumber < guessInt) {
     }
 if (randomNumber === guessInt) {
   this.setState({displayMessage: "YOU WIN! Click Reset to play again!"})
+  this.winningRange();
     }
 }
+
+setRange() {
+  let minInput = parseInt(this.state.min);
+  let maxInput= parseInt(this.state.max);
+  this.setState({min: minInput , max: maxInput});
+  this.generateRandomNumber();
+}
+
+winningRange() {
+    let minInput = parseInt(this.state.min);
+    let maxInput= parseInt(this.state.max);
+    minInput -= 10;
+    maxInput += 10;
+    console.log('hello')
+    this.setState({min: minInput , max: maxInput});
+    this.generateRandomNumber();
+  }
+
+  reset() {
+    this.setState({min: 0, max: 100})
+  }
+
 
   render () {
     return (
       <div className="Application">
-
-              <header id="header">
-                <h1 id="title"> NumberGuesser</h1>
-              </header>
-
-              <p>{this.state.displayMessage}</p>
-              <PlayerGuess submitGuess={this.checkGuess.bind(this)} resetGame={this.generateRandomNumber.bind(this)} />
-
-              <GuessRange setRange={this.generateRandomNumber.bind(this)}
-                displayMessage={this.state.displayMessage}
-                winningRange={this.generateRandomNumber.bind(this)}
-              />
-
+        <h1 id="title"> NumberGuesser</h1>
+          <p>{this.state.displayMessage}</p>
+          <PlayerGuess submitGuess={this.checkGuess.bind(this)} resetGame={this.reset.bind(this)} />
+          <div className="GuessRange">
+              <label>Min</label>
+              <input id="minRange" placeholder={this.state.min} value={this.state.min} onChange={(e) => this.setState({min: e.target.value})} onBlur={() => this.setRange()} />
+              <label>Max</label>
+              <input label="Min" id="maxRange" placeholder={this.state.max} value={this.state.max} onChange={(e) => this.setState({max: e.target.value})} onBlur={() => this.setRange()} />
+          </div>
       </div>
     );
   }
