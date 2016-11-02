@@ -4,8 +4,8 @@ class GuessRange extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      min: 0,
-      max: 100,
+      min: '',
+      max: ''
     };
   }
 
@@ -33,9 +33,9 @@ class GuessRange extends React.Component {
     return (
       <div className="GuessRange">
         <label>Min</label>
-        <input id="minRange" value={this.state.min} onChange={(e) => this.setState({min: e.target.value})} onBlur={() => this.setRange()} />
+        <input id="minRange" placeholder="0" value={this.state.min} onChange={(e) => this.setState({min: e.target.value})} onBlur={() => this.setRange()} />
         <label>Max</label>
-        <input label="Min" id="maxRange" value={this.state.max} onChange={(e) => this.setState({max: e.target.value})} onBlur={() => this.setRange()} />
+        <input label="Min" id="maxRange" placeholder="100" value={this.state.max} onChange={(e) => this.setState({max: e.target.value})} onBlur={() => this.setRange()} />
 
       </div>
     )

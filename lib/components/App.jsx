@@ -9,9 +9,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       randomNumber: null,
-      displayMessage: '',
-      min: 0,
-      max: 100
+      min: null,
+      max: null,
+      displayMessage: "Enter a number between 1 and 100 or set your own range, then click GUESS",
     };
   }
 
@@ -28,6 +28,7 @@ class App extends React.Component {
     this.setState({randomNumber: number
     });
   }
+
 
   checkGuess(guessInt) {
 var randomNumber = this.state.randomNumber
