@@ -9,7 +9,7 @@ class GuessRange extends React.Component {
     };
   }
 
-  shouldComponentUpdate({displayMessage}) {
+  winningRange({displayMessage}) {
     if(displayMessage==="YOU WIN! Click Reset to play again!") {
       let minInput = parseInt(this.state.min);
       let maxInput= parseInt(this.state.max);
@@ -17,12 +17,11 @@ class GuessRange extends React.Component {
       maxInput += 10;
       console.log('hello')
       this.setState({min: minInput , max: maxInput});
-      return this.props.setRange(minInput, maxInput);
+      return this.props.winningRange(minInput, maxInput);
     }
   }
 
-
-  setRange(displayMessage = '') {
+  setRange() {
     let minInput = parseInt(this.state.min);
     let maxInput= parseInt(this.state.max);
     this.setState({min: minInput , max: maxInput});
@@ -34,7 +33,7 @@ class GuessRange extends React.Component {
     return (
       <div className="GuessRange">
         <label>Min</label>
-        <input id="minRange" value={this.state.min} onChange={(e) => this.setState({min:  e.target.value})} onBlur={() => this.setRange()} />
+        <input id="minRange" value={this.state.min} onChange={(e) => this.setState({min: e.target.value})} onBlur={() => this.setRange()} />
         <label>Max</label>
         <input label="Min" id="maxRange" value={this.state.max} onChange={(e) => this.setState({max: e.target.value})} onBlur={() => this.setRange()} />
 

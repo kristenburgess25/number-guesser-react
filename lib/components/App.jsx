@@ -60,6 +60,7 @@ if (randomNumber === guessInt) {
 
               <GuessRange setRange={this.generateRandomNumber.bind(this)}
                 displayMessage={this.state.displayMessage}
+                winningRange={this.generateRandomNumber.bind(this)}
               />
 
       </div>
