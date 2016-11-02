@@ -77,13 +77,13 @@ winningRange() {
     return (
       <div className="Application">
         <h1 id="title"> NumberGuesser</h1>
-          <p>{this.state.displayMessage}</p>
+          <p id='displayMessage'>{this.state.displayMessage}</p>
           <PlayerGuess submitGuess={this.checkGuess.bind(this)} resetGame={this.reset.bind(this)} />
           <div className="GuessRange">
               <label>Min</label>
               <input id="minRange" placeholder={this.state.min} value={this.state.min} onChange={(e) => this.setState({min: e.target.value})} onBlur={() => this.setRange()} />
               <label>Max</label>
-              <input label="Min" id="maxRange" placeholder={this.state.max} value={this.state.max} onChange={(e) => this.setState({max: e.target.value})} onBlur={() => this.setRange()} />
+              <input id="maxRange" placeholder={this.state.max} value={this.state.max} onChange={(e) => this.setState({max: e.target.value})} onBlur={() => this.setRange()} />
           </div>
       </div>
     );
