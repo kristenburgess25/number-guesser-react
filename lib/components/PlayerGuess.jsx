@@ -43,7 +43,7 @@ class PlayerGuess extends React.Component {
       <input id="guessInput" type="text" value={this.state.guess} onChange={(e) => this.setState({guess: e.target.value})} placeholder="Enter your best guess!"/>
       <button disabled={disabled} id="Guess" onClick={() => this.submitGuess()}> GUESS </button>
       <button disabled={disabled} className="Clear" onClick={() => this.clearGuess()}> CLEAR </button>
-      <button className="Reset" onClick={() => this.resetGame()}> RESET </button>
+      <button disabled={disabled} className="Reset" onClick={() => this.resetGame()}> RESET </button>
       </div>
     )
   }

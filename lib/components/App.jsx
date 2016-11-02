@@ -11,7 +11,7 @@ class App extends React.Component {
       randomNumber: null,
       min: 0,
       max: 100,
-      displayMessage: "Enter a number between 1 and 100 or set your own range, then click GUESS",
+      displayMessage: "Enter a number between 1 and 100, then click GUESS",
     };
   }
 
@@ -29,19 +29,24 @@ class App extends React.Component {
 
   checkGuess(guessInt) {
 var randomNumber = this.state.randomNumber
+var min = this.state.min
+var max = this.state.max
 console.log(randomNumber)
 console.log(guessInt)
-if (isNaN(guessInt)) {
+if (min > guessInt || max < guessInt) {
+  this.setState({displayMessage: "Your guess is outside of the set range! Try again!"})
+    }
+else if (isNaN(guessInt)) {
   this.setState({displayMessage: "Please enter a valid number"})
-}
-if (randomNumber > guessInt) {
+    }
+else if (randomNumber > guessInt) {
   this.setState({displayMessage: "Your guess was too low! Try again!"})
     }
-if (randomNumber < guessInt) {
+else if (randomNumber < guessInt) {
   this.setState({displayMessage: "Your guess was too high! Try again!"})
     }
-if (randomNumber === guessInt) {
-  this.setState({displayMessage: "YOU WIN! Click Reset to play again!"})
+else if (randomNumber === guessInt) {
+  this.setState({displayMessage: "YOU WIN! Guess within the new range or set your own!"})
   this.winningRange();
     }
 }
